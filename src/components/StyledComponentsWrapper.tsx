@@ -4,6 +4,7 @@ import StyledComponentsRegistry from "@/lib/registry";
 import styled, { ThemeProvider } from "styled-components";
 import { theme } from "@/styles/theme";
 import GlobalStyle from "@/styles/GlobalStyle";
+import Header from "./common/Header";
 
 const StyledComponentsWrapper = ({
   children,
@@ -15,11 +16,10 @@ const StyledComponentsWrapper = ({
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <Layout>
-          {/* <Header /> */}
+          <Header />
           <ContentWrapper>
             <Main>{children}</Main>
           </ContentWrapper>
-          {/* <Footer /> */}
         </Layout>
       </ThemeProvider>
     </StyledComponentsRegistry>
@@ -29,38 +29,30 @@ const StyledComponentsWrapper = ({
 const Layout = styled.div`
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
 `;
 
 const ContentWrapper = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
-  min-height: 90vh;
 `;
 
 const Main = styled.main`
-  flex: 1;
   justify-content: center;
   margin: 10px 20px;
   /* 핸드폰 설정 */
   @media (min-width: 480px) {
-    margin: 20px 20px;
+    margin: 16px 16px;
   }
 
   /* 태블릿 크기 이상 설정 */
   @media (min-width: 768px) {
-    margin: 30px 60px;
+    margin: 24px 24px;
   }
 
   /* 데스크탑 크기 이상 설정 */
   @media (min-width: 1024px) {
-    margin: 50px 80px;
-  }
-
-  /* 큰 데스크탑 크기 이상 설정 */
-  @media (min-width: 1440px) {
-    margin: 80px 190px;
+    margin: 24px 360px;
   }
 `;
 

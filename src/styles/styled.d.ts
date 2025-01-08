@@ -10,7 +10,7 @@ declare module "styled-components" {
       rose: string;
       lime: string;
       amber: string;
-      gray: {
+      slate: {
         900: string;
         800: string;
         500: string;

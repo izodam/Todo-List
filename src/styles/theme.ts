@@ -9,7 +9,7 @@ export const theme: DefaultTheme = {
     rose: "#F43F5E",
     lime: "#BEF264",
     amber: "#92400E",
-    gray: {
+    slate: {
       900: "#0F172A",
       800: "#1E293B",
       500: "#64748B",
