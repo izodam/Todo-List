@@ -22,22 +22,29 @@ export const theme: DefaultTheme = {
   fonts: {
     bold20: `
       font-family: "NanumSquare";
-      font-weight: bold;
+      font-weight: 700;
       font-size: 20px;
     `,
     bold18: `
       font-family: "NanumSquare";
-      font-weight: bold;
+      font-weight: 700;
       font-size: 18px;
     `,
-    bold16: `
+    bold16: {
+      800: `
       font-family: "NanumSquare";
-      font-weight: bold;
+      font-weight: 800;
       font-size: 16px;
     `,
+      700: `
+      font-family: "NanumSquare";
+      font-weight: 700;
+      font-size: 16px;
+    `,
+    },
     regular16: `
       font-family: "NanumSquare";
-      font-weight: regular;
+      font-weight: 400;
       font-size: 16px;
     `,
   },

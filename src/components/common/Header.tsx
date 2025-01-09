@@ -14,12 +14,12 @@ function Header() {
     <HeaderContainer>
       <Logo onClick={handleLogoClick}>
         <img
-          src="/icons/Size=Small.svg"
+          src="/images/Size=Small.svg"
           alt="do it logo small"
           className="small-logo"
         />
         <img
-          src="/icons/Size=Large.svg"
+          src="/images/Size=Large.svg"
           alt="do it logo large"
           className="large-logo"
         />

@@ -1,11 +1,6 @@
 "use client";
-import styled from "styled-components";
+import AddTodo from "@/components/todoList/AddTodo";
 
 export default function Home() {
-  return <Container>Hello World!</Container>;
+  return <AddTodo hasTodo={true} />;
 }
-
-const Container = styled.div`
-  ${({ theme }) => theme.fonts.bold20};
-  color: ${({ theme }) => theme.colors.lime};
-`;

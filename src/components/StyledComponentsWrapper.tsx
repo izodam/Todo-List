@@ -39,20 +39,18 @@ const ContentWrapper = styled.div`
 
 const Main = styled.main`
   justify-content: center;
-  margin: 10px 20px;
-  /* 핸드폰 설정 */
-  @media (min-width: 480px) {
-    margin: 16px 16px;
-  }
-
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 16px;
   /* 태블릿 크기 이상 설정 */
   @media (min-width: 768px) {
-    margin: 24px 24px;
+    padding: 0 24px;
   }
 
   /* 데스크탑 크기 이상 설정 */
   @media (min-width: 1024px) {
-    margin: 24px 360px;
+    padding: 0 32px;
   }
 `;
 

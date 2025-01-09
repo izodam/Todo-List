@@ -23,7 +23,10 @@ declare module "styled-components" {
     fonts: {
       bold20: string;
       bold18: string;
-      bold16: string;
+      bold16: {
+        800: string;
+        700: string;
+      };
       regular16: string;
     };
   }
