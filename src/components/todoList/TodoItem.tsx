@@ -1,14 +1,25 @@
 import { TodoItemProps } from "@/types/todo";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import styled from "styled-components";
 
-function TodoItem({ name, isCompleted, onClick, onToggle }: TodoItemProps) {
+// 투두 리스트 각각 한줄을 렌더링
+function TodoItem({ id, name, isCompleted, toggleTodoStatus }: TodoItemProps) {
+  const router = useRouter();
+
+  const goDetailPage = () => {
+    console.log(`Navigating to /items/${id}`);
+    router.push(`/items/${id}`);
+  };
   return (
-    <TodoItemContainer $isCompleted={isCompleted} onClick={onClick}>
+    <TodoItemContainer
+      $isCompleted={isCompleted}
+      onClick={() => goDetailPage()}
+    >
       <Checkbox
         onClick={(e) => {
           e.stopPropagation(); // 클릭 이벤트 전파 방지
-          onToggle();
+          toggleTodoStatus(id);
         }}
       >
         <Image

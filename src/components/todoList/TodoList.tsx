@@ -1,82 +1,60 @@
 import { TodoItem as TodoItemType } from "@/types/todo";
 import Image from "next/image";
-import { useState } from "react";
 import styled from "styled-components";
 import TodoItem from "./TodoItem";
-import { useRouter } from "next/navigation";
 
-const initialTodos: TodoItemType[] = [
-  { id: "1", name: "비타민 챙겨 먹기", isCompleted: false },
-  { id: "2", name: "맥주 마시기", isCompleted: false },
-  { id: "3", name: "운동하기", isCompleted: false },
-  { id: "4", name: "은행 다녀오기", isCompleted: true },
-  { id: "5", name: "비타민 챙겨 먹자", isCompleted: true },
-];
+interface todoListProps {
+  isTodo: boolean;
+  title: string;
+  todos: TodoItemType[];
+  toggleTodoStatus: (id: string) => void;
+}
 
-function TodoList() {
-  const [todos, setTodos] = useState<TodoItemType[]>(initialTodos);
-  const router = useRouter();
-
-  const goDetailPage = (id: string) => {
-    console.log(`Navigating to /items/${id}`);
-    router.push(`/items/${id}`);
-  };
-
-  const toggleTodoStatus = (id: string) => {
-    setTodos((prevTodos) =>
-      prevTodos.map((todo) =>
-        todo.id === id ? { ...todo, isCompleted: !todo.isCompleted } : todo
-      )
-    );
-  };
+// 각 todo와 done에 대해 section을 렌더링
+function TodoList({ isTodo, title, todos, toggleTodoStatus }: todoListProps) {
+  const emptyMessage = isTodo
+    ? "할 일이 없어요.\nTODO를 새롭게 추가해주세요!"
+    : "아직 다 한 일이 없어요.\n해야 할 일을 체크해보세요!";
 
   return (
-    <TodoListContainer>
-      <TodoSection>
-        <Image src="/images/todo.svg" alt="todo" width={101} height={36} />
+    <TodoSection>
+      <Image src={`/images/${title}.svg`} alt="todo" width={101} height={36} />
+      {todos.length > 0 ? (
+        // 할일이 있다면 할일 list 렌더링
         <TodoItemsContainer>
-          {todos
-            .filter((todo) => !todo.isCompleted)
-            .map((todo) => (
-              <TodoItem
-                key={todo.id}
-                {...todo}
-                onClick={() => goDetailPage(todo.id)}
-                onToggle={() => toggleTodoStatus(todo.id)}
-              />
-            ))}
+          {todos.map((todo) => (
+            <TodoItem
+              key={todo.id}
+              {...todo}
+              toggleTodoStatus={toggleTodoStatus}
+            />
+          ))}
         </TodoItemsContainer>
-      </TodoSection>
-      <TodoSection>
-        <Image src="/images/done.svg" alt="todo" width={101} height={36} />
-        <TodoItemsContainer>
-          {todos
-            .filter((todo) => todo.isCompleted)
-            .map((todo) => (
-              <TodoItem
-                key={todo.id}
-                {...todo}
-                onClick={() => goDetailPage(todo.id)}
-                onToggle={() => toggleTodoStatus(todo.id)}
-              />
-            ))}
-        </TodoItemsContainer>
-      </TodoSection>
-    </TodoListContainer>
+      ) : (
+        // 할일이 비어있다면 비어있다는 표시 렌더링
+        <EmptyState>
+          <Image
+            src={`/images/empty_${title}_large.svg`}
+            alt="Empty status"
+            width={240}
+            height={240}
+            className="large-logo"
+          />
+          <Image
+            src={`/images/empty_${title}_small.svg`}
+            alt="Empty status"
+            width={120}
+            height={120}
+            className="small-logo"
+          />
+          <EmptyText>{emptyMessage}</EmptyText>
+        </EmptyState>
+      )}
+    </TodoSection>
   );
 }
 
 export default TodoList;
-
-const TodoListContainer = styled.div`
-  display: flex;
-  gap: 24px;
-  flex-direction: column;
-
-  @media (min-width: 1024px) {
-    flex-direction: row;
-  }
-`;
 
 const TodoSection = styled.div`
   margin-top: 24px;
@@ -88,4 +66,37 @@ const TodoItemsContainer = styled.div`
   flex-direction: column;
   gap: 16px;
   margin-top: 16px;
+`;
+
+const EmptyState = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 24px;
+
+  .small-logo {
+    display: block;
+
+    @media (min-width: 768px) {
+      display: none;
+    }
+  }
+
+  /* 태블릿 및 데스크탑 로고 */
+  .large-logo {
+    display: none;
+
+    @media (min-width: 768px) {
+      display: block;
+    }
+  }
+`;
+
+const EmptyText = styled.p`
+  ${({ theme }) => theme.fonts.regular16};
+  color: ${({ theme }) => theme.colors.slate[400]};
+  text-align: center;
+  white-space: pre-line;
 `;

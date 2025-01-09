@@ -5,6 +5,5 @@ export interface TodoItem {
 }
 
 export interface TodoItemProps extends TodoItem {
-  onClick: () => void;
-  onToggle: () => void;
+  toggleTodoStatus: (id: string) => void;
 }
