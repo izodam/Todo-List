@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import styled from "styled-components";
 
@@ -13,14 +14,18 @@ function Header() {
   return (
     <HeaderContainer>
       <Logo onClick={handleLogoClick}>
-        <img
+        <Image
           src="/images/Size=Small.svg"
           alt="do it logo small"
+          width={71}
+          height={40}
           className="small-logo"
         />
-        <img
+        <Image
           src="/images/Size=Large.svg"
           alt="do it logo large"
+          width={151}
+          height={40}
           className="large-logo"
         />
       </Logo>
@@ -34,6 +39,9 @@ const HeaderContainer = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
   padding: 0 16px;
   height: 60px;
   border-bottom: 1px solid ${({ theme }) => theme.colors.slate[200]};
@@ -43,7 +51,7 @@ const HeaderContainer = styled.header`
   }
   /* 데스크탑 레이아웃 */
   @media (min-width: 1024px) {
-    padding: 0 360px;
+    padding: 0 32px;
   }
 `;
 

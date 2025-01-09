@@ -62,7 +62,7 @@ const StyledInput = styled.input`
   ${({ theme }) => theme.fonts.regular16}
   width: 100%;
   max-width: 1016px;
-  padding-left: 24px;
+  padding: 0 24px;
   border: 2px solid ${({ theme }) => theme.colors.slate[900]};
   border-radius: 24px;
   background-color: ${({ theme }) => theme.colors.slate[100]};
