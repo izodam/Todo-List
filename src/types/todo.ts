@@ -1,9 +1,9 @@
 export interface TodoItem {
-  id: string;
+  id: number;
   name: string;
   isCompleted: boolean;
 }
 
 export interface TodoItemProps extends TodoItem {
-  toggleTodoStatus: (id: string) => void;
+  toggleTodoStatus: (id: number, isCompleted: boolean) => void;
 }

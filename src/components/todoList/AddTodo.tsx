@@ -4,19 +4,26 @@ import { styled } from "styled-components";
 import plus_white from "../../../public/icons/plus_white.svg";
 import plus_black from "../../../public/icons/plus_black.svg";
 import { customButtonStyles } from "@/styles/customBottonStyles";
+import { addTodo } from "@/api/todo";
 
 interface AddTodoProps {
   hasTodo: boolean;
+  refreshTodos: () => void;
 }
 
-function AddTodo({ hasTodo }: AddTodoProps) {
+function AddTodo({ hasTodo, refreshTodos }: AddTodoProps) {
   const [inputValue, setInputValue] = useState<string>("");
 
   // 추가하기 버튼을 눌렀을 때 실행될 함수
-  const handleAddTodo = () => {
-    if (inputValue.trim()) {
-      console.log(inputValue);
+  const handleAddTodo = async () => {
+    if (!inputValue.trim()) return;
+
+    try {
+      await addTodo(inputValue);
       setInputValue("");
+      refreshTodos();
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -80,6 +87,7 @@ const StyledInput = styled.input`
 
 const AddButton = styled.button<{ $hasTodo: boolean }>`
   ${customButtonStyles}
+  cursor: pointer;
 
   @media (min-width: 768px) {
     min-width: 168px;

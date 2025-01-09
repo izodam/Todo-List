@@ -7,7 +7,7 @@ interface todoListProps {
   isTodo: boolean;
   title: string;
   todos: TodoItemType[];
-  toggleTodoStatus: (id: string) => void;
+  toggleTodoStatus: (id: number, isCompleted: boolean) => void;
 }
 
 // 각 todo와 done에 대해 section을 렌더링
