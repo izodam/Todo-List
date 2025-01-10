@@ -1,18 +1,20 @@
-"use client";
-
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
+interface TodoInputProps {
+  initialName: string;
+  isCompleted: boolean;
+  updateTodoName: (newName: string) => void;
+  toggleIsCompleted: () => void;
+}
 function TodoInput({
   initialName,
-  initialIsCompleted,
-}: {
-  initialName: string;
-  initialIsCompleted: boolean;
-}) {
+  isCompleted,
+  updateTodoName,
+  toggleIsCompleted,
+}: TodoInputProps) {
   const [name, setName] = useState<string>(initialName);
-  const [isCompleted, setIsCompleted] = useState(initialIsCompleted);
 
   // input창 크기를 동적으로 설정
   const [inputWidth, setInputWidth] = useState<number>(0);
@@ -24,13 +26,15 @@ function TodoInput({
     }
   }, [name]);
 
-  const hanelCheckClick = () => {
-    setIsCompleted((prev) => !prev);
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newName = e.target.value;
+    setName(newName);
+    updateTodoName(newName);
   };
 
   return (
     <NameContainer $isCompleted={isCompleted}>
-      <Checkbox onClick={hanelCheckClick}>
+      <Checkbox onClick={toggleIsCompleted}>
         <Image
           src={
             isCompleted ? "/icons/checkbox_checked.svg" : "/icons/checkbox.svg"
@@ -47,7 +51,7 @@ function TodoInput({
         <NameInput
           type="text"
           value={name}
-          onChange={(e) => setName(e.target.value)}
+          onChange={handleInputChange}
           style={{ width: `${inputWidth}px` }}
         />
       </InputWrapper>

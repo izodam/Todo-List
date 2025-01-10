@@ -88,7 +88,10 @@ const StyledInput = styled.input`
 
 const AddButton = styled.button<{ $hasTodo: boolean }>`
   ${customButtonStyles}
-  cursor: pointer;
+  background-color: ${({ $hasTodo: $isActive, theme }) =>
+    $isActive ? theme.colors.slate[200] : theme.colors.violet[600]};
+  color: ${({ $hasTodo: $isActive, theme }) =>
+    $isActive ? theme.colors.slate[900] : "white"};
 
   @media (min-width: 768px) {
     min-width: 168px;

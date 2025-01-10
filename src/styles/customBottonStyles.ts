@@ -1,7 +1,7 @@
 import { css } from "styled-components";
 
 // 기본 버튼 스타일
-export const customButtonStyles = css<{ $hasTodo?: boolean }>`
+export const customButtonStyles = css`
   ${({ theme }) => theme.fonts.bold16[700]}
   min-width: 56px;
   display: flex;
@@ -11,10 +11,7 @@ export const customButtonStyles = css<{ $hasTodo?: boolean }>`
   border-radius: 24px;
   box-shadow: 4px 4px ${({ theme }) => theme.colors.slate[900]};
   gap: 4px;
-  background-color: ${({ $hasTodo: $isActive, theme }) =>
-    $isActive ? theme.colors.slate[200] : theme.colors.violet[600]};
-  color: ${({ $hasTodo: $isActive, theme }) =>
-    $isActive ? theme.colors.slate[900] : "white"};
+  cursor: pointer;
 
   span {
     display: block;
