@@ -17,9 +17,7 @@ const StyledComponentsWrapper = ({
         <GlobalStyle />
         <Layout>
           <Header />
-          <ContentWrapper>
-            <Main>{children}</Main>
-          </ContentWrapper>
+          <ContentWrapper>{children}</ContentWrapper>
         </Layout>
       </ThemeProvider>
     </StyledComponentsRegistry>
@@ -29,29 +27,14 @@ const StyledComponentsWrapper = ({
 const Layout = styled.div`
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
 `;
 
 const ContentWrapper = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
-`;
-
-const Main = styled.main`
-  justify-content: center;
-  max-width: 1200px;
-  margin: 0 auto;
-  width: 100%;
-  padding: 0 16px;
-  /* 태블릿 크기 이상 설정 */
-  @media (min-width: 768px) {
-    padding: 0 24px;
-  }
-
-  /* 데스크탑 크기 이상 설정 */
-  @media (min-width: 1024px) {
-    padding: 0 32px;
-  }
+  background-color: #f9fafb;
 `;
 
 export default StyledComponentsWrapper;

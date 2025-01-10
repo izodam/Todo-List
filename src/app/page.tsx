@@ -4,6 +4,8 @@ import AddTodo from "@/components/todoList/AddTodo";
 import { TodoItemType as TodoItemType } from "@/types/todo";
 import TodoListSection from "@/components/todoList/TodoListSection";
 import { fetchTodos, toggleComplate } from "@/api/todo";
+import styled from "styled-components";
+import { MainContainer } from "@/styles/customMain";
 
 export default function Home() {
   const [todos, setTodos] = useState<TodoItemType[]>([]);
@@ -36,9 +38,13 @@ export default function Home() {
   };
 
   return (
-    <>
+    <Main>
       <AddTodo hasTodo={hasTodo} addTodoState={addTodoState} />
       <TodoListSection todos={todos} toggleTodoStatus={toggleTodoStatus} />
-    </>
+    </Main>
   );
 }
+
+const Main = styled.main`
+  ${MainContainer}
+`;
