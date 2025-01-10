@@ -5,13 +5,14 @@ import plus_white from "../../../public/icons/plus_white.svg";
 import plus_black from "../../../public/icons/plus_black.svg";
 import { customButtonStyles } from "@/styles/customBottonStyles";
 import { addTodo } from "@/api/todo";
+import { TodoItem } from "@/types/todo";
 
 interface AddTodoProps {
   hasTodo: boolean;
-  refreshTodos: () => void;
+  addTodoState: (newTodo: TodoItem) => void;
 }
 
-function AddTodo({ hasTodo, refreshTodos }: AddTodoProps) {
+function AddTodo({ hasTodo, addTodoState }: AddTodoProps) {
   const [inputValue, setInputValue] = useState<string>("");
 
   // 추가하기 버튼을 눌렀을 때 실행될 함수
@@ -19,9 +20,9 @@ function AddTodo({ hasTodo, refreshTodos }: AddTodoProps) {
     if (!inputValue.trim()) return;
 
     try {
-      await addTodo(inputValue);
+      const newTodo = await addTodo(inputValue);
+      addTodoState(newTodo);
       setInputValue("");
-      refreshTodos();
     } catch (error) {
       console.log(error);
     }

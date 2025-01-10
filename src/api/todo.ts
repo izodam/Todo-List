@@ -14,7 +14,8 @@ export const fetchTodos = async () => {
 // 항목 추가
 export const addTodo = async (name: string) => {
   try {
-    await api.post("/izodam/items", { name });
+    const response = await api.post("/izodam/items", { name });
+    return response.data;
   } catch (err) {
     console.error("Failed to add todos:", err);
   }
@@ -23,7 +24,7 @@ export const addTodo = async (name: string) => {
 // 체크박스 수정
 export const toggleComplate = async (id: number, isCompleted: boolean) => {
   try {
-    await api.patch(`/izodam/items/${id}`, { isCompleted: !isCompleted });
+    await api.patch(`/izodam/items/${id}`, { isCompleted });
   } catch (err) {
     console.error("Failed to fix todos:", err);
   }

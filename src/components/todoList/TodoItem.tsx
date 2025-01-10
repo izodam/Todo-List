@@ -8,7 +8,6 @@ function TodoItem({ id, name, isCompleted, toggleTodoStatus }: TodoItemProps) {
   const router = useRouter();
 
   const goDetailPage = () => {
-    console.log(`Navigating to /items/${id}`);
     router.push(`/items/${id}`);
   };
   return (
@@ -19,7 +18,7 @@ function TodoItem({ id, name, isCompleted, toggleTodoStatus }: TodoItemProps) {
       <Checkbox
         onClick={(e) => {
           e.stopPropagation(); // 클릭 이벤트 전파 방지
-          toggleTodoStatus(id, isCompleted);
+          toggleTodoStatus(id, !isCompleted);
         }}
       >
         <Image
