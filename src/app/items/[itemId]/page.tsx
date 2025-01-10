@@ -1,12 +1,5 @@
+import { fetchTodoDetail } from "@/api/todoDetail";
 import TodoDetail from "@/components/todoDetail/TodoDetail";
-
-const dummyTodoDetail = {
-  id: 1,
-  name: "할일 1",
-  memo: null,
-  imageUrl: null,
-  isCompleted: false,
-};
 
 export default async function DetailPage({
   params,
@@ -14,10 +7,11 @@ export default async function DetailPage({
   params: Promise<{ itemId: string }>;
 }) {
   const itemId = (await params).itemId;
+  const todoDetail = await fetchTodoDetail(parseInt(itemId));
 
   return (
     <div>
-      <TodoDetail initialTodo={dummyTodoDetail} />
+      <TodoDetail initialTodo={todoDetail} />
     </div>
   );
 }

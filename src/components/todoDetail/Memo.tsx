@@ -2,11 +2,11 @@ import { useState } from "react";
 import styled from "styled-components";
 
 interface memoProps {
-  initialMemo: string | null;
+  initialMemo: string;
   updateMemo: (newMemo: string) => void;
 }
 function Memo({ initialMemo, updateMemo }: memoProps) {
-  const [memo, setMemo] = useState<string | null>(initialMemo);
+  const [memo, setMemo] = useState<string>(initialMemo);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const newMemo = e.target.value;
@@ -17,7 +17,7 @@ function Memo({ initialMemo, updateMemo }: memoProps) {
     <MemoContainer>
       <Title>Memo</Title>
       <MemoInputContainer>
-        <MemoInput value={memo ?? ""} onChange={handleInputChange} />
+        <MemoInput value={memo} onChange={handleInputChange} />
       </MemoInputContainer>
     </MemoContainer>
   );

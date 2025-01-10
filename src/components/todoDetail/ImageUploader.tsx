@@ -2,14 +2,14 @@ import Image from "next/image";
 import styled from "styled-components";
 
 interface ImageUploaderProps {
-  imageUrl: string | null;
+  imageUrl: string;
   onImageChange: () => void;
 }
 
 function ImageUploader({ imageUrl, onImageChange }: ImageUploaderProps) {
   return (
     <ImageContainer>
-      {imageUrl ? (
+      {imageUrl.length !== 0 ? (
         <>
           <StyledImage src={imageUrl} alt="Uploaded Image" fill />
           <EditButton onClick={onImageChange}>

@@ -3,18 +3,22 @@ import ImageUploader from "./ImageUploader";
 import Memo from "./Memo";
 
 interface detailSectionProps {
+  imageUrl: string;
+  memo: string;
   updateMemo: (newMemo: string) => void;
+  handleImageChange: () => void;
 }
 
-function DetailSection({ updateMemo }: detailSectionProps) {
-  const handleImageChange = () => {
-    console.log("이미지 추가");
-  };
-
+function DetailSection({
+  imageUrl,
+  memo,
+  updateMemo,
+  handleImageChange,
+}: detailSectionProps) {
   return (
     <SectionContainer>
-      <ImageUploader imageUrl={null} onImageChange={handleImageChange} />
-      <Memo initialMemo={null} updateMemo={updateMemo} />
+      <ImageUploader imageUrl={imageUrl} onImageChange={handleImageChange} />
+      <Memo initialMemo={memo} updateMemo={updateMemo} />
     </SectionContainer>
   );
 }
