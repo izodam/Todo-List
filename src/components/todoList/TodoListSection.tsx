@@ -1,9 +1,9 @@
-import { TodoItem } from "@/types/todo";
+import { TodoItemType } from "@/types/todo";
 import styled from "styled-components";
 import TodoList from "./TodoList";
 
 interface TodoListSectionProps {
-  todos: TodoItem[];
+  todos: TodoItemType[];
   toggleTodoStatus: (id: number, isCompleted: boolean) => void;
 }
 

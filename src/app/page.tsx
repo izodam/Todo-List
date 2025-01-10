@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import AddTodo from "@/components/todoList/AddTodo";
-import { TodoItem as TodoItemType } from "@/types/todo";
+import { TodoItemType as TodoItemType } from "@/types/todo";
 import TodoListSection from "@/components/todoList/TodoListSection";
 import { fetchTodos, toggleComplate } from "@/api/todo";
 

@@ -5,11 +5,11 @@ import plus_white from "../../../public/icons/plus_white.svg";
 import plus_black from "../../../public/icons/plus_black.svg";
 import { customButtonStyles } from "@/styles/customBottonStyles";
 import { addTodo } from "@/api/todo";
-import { TodoItem } from "@/types/todo";
+import { TodoItemType } from "@/types/todo";
 
 interface AddTodoProps {
   hasTodo: boolean;
-  addTodoState: (newTodo: TodoItem) => void;
+  addTodoState: (newTodo: TodoItemType) => void;
 }
 
 function AddTodo({ hasTodo, addTodoState }: AddTodoProps) {

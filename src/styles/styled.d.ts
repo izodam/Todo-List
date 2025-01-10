@@ -5,6 +5,7 @@ declare module "styled-components" {
     colors: {
       violet: {
         600: string;
+        200: string;
         100: string;
       };
       rose: string;

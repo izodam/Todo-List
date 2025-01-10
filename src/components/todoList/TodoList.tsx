@@ -1,4 +1,4 @@
-import { TodoItem as TodoItemType } from "@/types/todo";
+import { TodoItemType } from "@/types/todo";
 import Image from "next/image";
 import styled from "styled-components";
 import TodoItem from "./TodoItem";
