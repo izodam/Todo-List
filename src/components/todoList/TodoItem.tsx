@@ -49,6 +49,9 @@ const TodoItemContainer = styled.div<{ $isCompleted: boolean }>`
   cursor: pointer;
   background-color: ${({ $isCompleted, theme }) =>
     $isCompleted ? theme.colors.violet[100] : "none"};
+  @media (min-width: 1024px) {
+    max-width: 588px;
+  }
 `;
 
 const Checkbox = styled.button`
@@ -65,9 +68,14 @@ const Checkbox = styled.button`
   }
 `;
 
-const TodoText = styled.span<{ $isCompleted: boolean }>`
+const TodoText = styled.div<{ $isCompleted: boolean }>`
   ${({ theme }) => theme.fonts.regular16}
   color: ${({ theme }) => theme.colors.slate[800]};
   text-decoration: ${({ $isCompleted }) =>
     $isCompleted ? "line-through" : "none"};
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  flex-shrink: 1;
 `;

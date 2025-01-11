@@ -22,7 +22,7 @@ function TodoInput({
 
   useEffect(() => {
     if (hiddenElementRef.current) {
-      setInputWidth(hiddenElementRef.current.offsetWidth);
+      setInputWidth(hiddenElementRef.current.clientWidth);
     }
   }, [name]);
 
@@ -46,7 +46,7 @@ function TodoInput({
       </Checkbox>
       <InputWrapper>
         <HiddenText ref={hiddenElementRef} aria-hidden="true">
-          {name || " "}
+          {name}
         </HiddenText>
         <NameInput
           type="text"
@@ -102,8 +102,9 @@ const HiddenText = styled.div`
   ${({ theme }) => theme.fonts.bold20}
   visibility: hidden;
   height: 0;
-  white-space: wrap;
   overflow: hidden;
+  white-space: nowrap;
+  position: absolute;
 `;
 
 const NameInput = styled.input`

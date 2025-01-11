@@ -1,13 +1,14 @@
+import { TodoItemType } from "@/types/todo";
 import api from "./index";
 
 // 항목 목록 조회
-export const fetchTodos = async () => {
+export const fetchTodos = async (): Promise<TodoItemType[] | null> => {
   try {
     const response = await api.get("/izodam/items");
     return response.data;
   } catch (err) {
     console.error("Failed to fetch todos:", err);
-    return [];
+    return null;
   }
 };
 

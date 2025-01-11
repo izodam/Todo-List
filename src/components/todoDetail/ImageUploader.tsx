@@ -7,9 +7,11 @@ interface ImageUploaderProps {
 }
 
 function ImageUploader({ imageUrl, onImageChange }: ImageUploaderProps) {
+  const hasImage = imageUrl.length !== 0;   // 이미지 여부 판단
+
   return (
-    <ImageContainer>
-      {imageUrl.length !== 0 ? (
+    <ImageContainer $hasImage={hasImage} >
+      {hasImage ? (
         <>
           <StyledImage src={imageUrl} alt="Uploaded Image" fill />
           <EditButton onClick={onImageChange}>
@@ -47,15 +49,16 @@ function ImageUploader({ imageUrl, onImageChange }: ImageUploaderProps) {
 
 export default ImageUploader;
 
-const ImageContainer = styled.div`
+const ImageContainer = styled.div<{$hasImage: boolean}>`
   position: relative;
   width: 100%;
   height: 311px;
-  border: 2px dashed ${({ theme }) => theme.colors.slate[300]};
+  border: ${({$hasImage, theme}) => $hasImage ? "none" : `2px dashed ${theme.colors.slate[300]}`};
   border-radius: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: #F8FAFC;
 
   @media (min-width: 1024px) {
     max-width: 384px;
