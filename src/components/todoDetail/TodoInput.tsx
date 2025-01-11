@@ -96,14 +96,14 @@ const InputWrapper = styled.div`
   position: relative;
   display: inline-block;
   max-width: 100%;
+  overflow: hidden;
 `;
 
 const HiddenText = styled.div`
   ${({ theme }) => theme.fonts.bold20}
   visibility: hidden;
   height: 0;
-  overflow: hidden;
-  white-space: nowrap;
+  white-space: wrap;
   position: absolute;
 `;
 
