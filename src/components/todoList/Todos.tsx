@@ -44,9 +44,7 @@ function Todos() {
 
   // 무한 스크롤 데이터 로드
   useEffect(() => {
-    console.log(page);
-    if (!inView || !hasMore || isScrollLoading || isPageLoading || page === 1)
-      return; // 첫 페이지는 이미 로드됨
+    if (!inView || !hasMore || isScrollLoading || page === 1) return; // 첫 페이지는 이미 로드됨
 
     if (inView && hasMore && !isScrollLoading) {
       const loadMoreTodos = async () => {

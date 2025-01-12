@@ -17,10 +17,12 @@ export interface TodoListProps {
   isTodo: boolean;
   title: string;
   todos: TodoItemType[];
+  isLoading: boolean;
   toggleTodoStatus: (id: number, isCompleted: boolean) => void;
 }
 
 export interface TodoListSectionProps {
   todos: TodoItemType[];
+  isLoading: boolean;
   toggleTodoStatus: (id: number, isCompleted: boolean) => void;
 }
