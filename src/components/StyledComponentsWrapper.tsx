@@ -28,6 +28,7 @@ const Layout = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  height: auto;
 `;
 
 const ContentWrapper = styled.div`
@@ -35,6 +36,7 @@ const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   background-color: #f9fafb;
+  overflow: auto;
 `;
 
 export default StyledComponentsWrapper;
