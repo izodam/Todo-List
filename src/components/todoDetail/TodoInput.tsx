@@ -103,7 +103,7 @@ const HiddenText = styled.div`
   ${({ theme }) => theme.fonts.bold20}
   visibility: hidden;
   height: 0;
-  white-space: wrap;
+  white-space: nowrap;
   position: absolute;
 `;
 
@@ -115,4 +115,5 @@ const NameInput = styled.input`
   text-decoration: underline;
   color: ${({ theme }) => theme.colors.slate[900]};
   white-space: nowrap;
+  max-width: 100%;
 `;

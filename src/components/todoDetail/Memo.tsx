@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
 interface memoProps {
@@ -8,16 +8,34 @@ interface memoProps {
 function Memo({ initialMemo, updateMemo }: memoProps) {
   const [memo, setMemo] = useState<string>(initialMemo);
 
+  // 메모 textarea를 수직 가운데에 위치하기 위해 height를 동적으로 설정
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  useEffect(() => {
+    if (textareaRef.current) {
+      textareaRef.current.style.height = "auto"
+      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`
+    }
+  }, [memo]);
+
+  // 메모 칸 중 어디를 선택해도 textarea에 포커스
+  const handleMemoClick = () => {
+    if (textareaRef.current) {
+      textareaRef.current.focus()
+    }
+  };
+
   const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const newMemo = e.target.value;
     setMemo(newMemo);
     updateMemo(newMemo);
   };
+
   return (
-    <MemoContainer>
+    <MemoContainer onClick={handleMemoClick}>
       <Title>Memo</Title>
       <MemoInputContainer>
-        <MemoInput value={memo} onChange={handleInputChange} />
+        <MemoInput ref={textareaRef} value={memo} onChange={handleInputChange} />
       </MemoInputContainer>
     </MemoContainer>
   );
