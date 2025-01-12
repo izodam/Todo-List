@@ -76,6 +76,5 @@ const TodoText = styled.div<{ $isCompleted: boolean }>`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 100%;
   flex-shrink: 1;
 `;

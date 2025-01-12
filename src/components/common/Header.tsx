@@ -1,14 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import styled from "styled-components";
 
 function Header() {
-  const router = useRouter();
-
   const handleLogoClick = () => {
-    router.push("/"); // '/' 페이지로 이동
+    window.location.href = "/";
   };
 
   return (

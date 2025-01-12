@@ -1,36 +1,31 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 📝Todo List
 
-## Getting Started
+할 일 목록을 관리하는 Todo 서비스입니다.
 
-First, run the development server:
+할 일을 등록하고 사진과 메모를 함께 저장해 효율적으로 관리할 수 있습니다.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+<img width="1000" alt="image" src="./asset/main_nothing.PNG">
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 💻 프로젝트 주요 기능
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 📃**투두 목록 관리**
 
-## Learn More
+- 할 일을 입력하면 투두 리스트에 추가할 수 있습니다.
+- 투두 리스트의 왼쪽 동그라미 체크박스를 눌러 진행중/완료 상태로 변경할 수 있습니다.
 
-To learn more about Next.js, take a look at the following resources:
+<img width="1000" alt="image" src="./asset/main.PNG">
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 🖊 **할 일 수정하기**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- 할 일의 제목을 변경할 수 있습니다.
+- 제목 왼쪽의 체크박스를 통해 진행 상태를 수정할 수 있습니다.
+- 사진을 등록/변경할 수 있습니다.
+  - 이미지 파일 이름은 영어로만 이루어지고, 크기는 5MB 이하만 가능합니다.
+- 메모를 등록/변경할 수 있습니다.
+- 해당 할 일을 삭제할 수 있습니다.
 
-## Deploy on Vercel
+<img width="1000" alt="image" src="./asset/detail.PNG">
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## ⚒️ 기술 스택
