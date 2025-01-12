@@ -11,6 +11,7 @@ function TodoList({
   todos,
   toggleTodoStatus,
   isLoading,
+  ref,
 }: TodoListProps) {
   const emptyMessage = isTodo
     ? "할 일이 없어요.\nTODO를 새롭게 추가해주세요!"
@@ -63,6 +64,7 @@ function TodoList({
           <EmptyText>{emptyMessage}</EmptyText>
         </EmptyState>
       )}
+      <LoadingTrigger ref={ref} />
     </TodoSection>
   );
 }
@@ -112,4 +114,8 @@ const EmptyText = styled.p`
   color: ${({ theme }) => theme.colors.slate[400]};
   text-align: center;
   white-space: pre-line;
+`;
+
+const LoadingTrigger = styled.div`
+  height: 30px;
 `;

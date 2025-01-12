@@ -18,7 +18,8 @@ function Todos() {
   const [isPageLoading, setIsPageLoading] = useState<boolean>(true); // 첫 로딩 상태
   const [isScrollLoading, setIsScrollLoading] = useState<boolean>(false); // 무한 스크롤 로딩 상태
 
-  const { ref, inView } = useInView({ threshold: 1.0 });
+  const { ref: todoRef, inView: todoInView } = useInView({ threshold: 1.0 });
+  const { ref: doneRef, inView: doneInView } = useInView({ threshold: 1.0 });
 
   const pageSize = 10; // 한번에 불러올 항목 수
 
@@ -44,26 +45,31 @@ function Todos() {
 
   // 무한 스크롤 데이터 로드
   useEffect(() => {
-    if (!inView || !hasMore || isScrollLoading || page === 1) return; // 첫 페이지는 이미 로드됨
+    if (
+      (!todoInView && !doneInView) ||
+      !hasMore ||
+      isScrollLoading ||
+      page === 1
+    )
+      return; // 첫 페이지는 이미 로드됨
 
-    if (inView && hasMore && !isScrollLoading) {
-      const loadMoreTodos = async () => {
-        setIsScrollLoading(true);
-        try {
-          const newTodos = await fetchTodos(page, pageSize);
-          setTodos((prev) => [...prev, ...newTodos]);
-          setHasMore(newTodos.length === pageSize);
-          await setPage((prev) => prev + 1);
-        } catch (error) {
-          console.error("Failed to load more todos:", error);
-        } finally {
-          setIsScrollLoading(false);
-        }
-      };
+    // if (todoInView && hasMore && !isScrollLoading) {
+    const loadMoreTodos = async () => {
+      setIsScrollLoading(true);
+      try {
+        const newTodos = await fetchTodos(page, pageSize);
+        setTodos((prev) => [...prev, ...newTodos]);
+        setHasMore(newTodos.length === pageSize);
+        await setPage((prev) => prev + 1);
+      } catch (error) {
+        console.error("Failed to load more todos:", error);
+      } finally {
+        setIsScrollLoading(false);
+      }
+    };
 
-      loadMoreTodos();
-    }
-  }, [inView, page, hasMore, isScrollLoading]);
+    loadMoreTodos();
+  }, [todoInView, doneInView, page, hasMore, isScrollLoading]);
 
   const hasTodo = todos.length > 0;
 
@@ -92,8 +98,9 @@ function Todos() {
         todos={todos}
         isLoading={isPageLoading}
         toggleTodoStatus={toggleTodoStatus}
+        todoRef={todoRef}
+        doneRef={doneRef}
       />
-      {!isScrollLoading && hasMore && <LoadingTrigger ref={ref} />}
       {!isPageLoading && isScrollLoading && <LoadingSpinner />}
     </Main>
   );
@@ -105,6 +112,3 @@ const Main = styled.main`
   ${MainContainer}
 `;
 
-const LoadingTrigger = styled.div`
-  height: 30px;
-`;

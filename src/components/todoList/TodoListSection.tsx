@@ -7,6 +7,8 @@ function TodoListSection({
   todos,
   toggleTodoStatus,
   isLoading,
+  todoRef,
+  doneRef,
 }: TodoListSectionProps) {
   const todolist = todos?.filter((todo) => !todo.isCompleted);
   const doneTodolist = todos?.filter((todo) => todo.isCompleted);
@@ -19,6 +21,7 @@ function TodoListSection({
         todos={todolist}
         isLoading={isLoading}
         toggleTodoStatus={toggleTodoStatus}
+        ref={todoRef}
       />
       <TodoList
         isTodo={false}
@@ -26,6 +29,7 @@ function TodoListSection({
         todos={doneTodolist}
         isLoading={isLoading}
         toggleTodoStatus={toggleTodoStatus}
+        ref={doneRef}
       />
     </TodoListContainer>
   );

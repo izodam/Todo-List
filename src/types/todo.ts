@@ -19,10 +19,13 @@ export interface TodoListProps {
   todos: TodoItemType[];
   isLoading: boolean;
   toggleTodoStatus: (id: number, isCompleted: boolean) => void;
+  ref: React.Ref<HTMLDivElement>;
 }
 
 export interface TodoListSectionProps {
   todos: TodoItemType[];
   isLoading: boolean;
   toggleTodoStatus: (id: number, isCompleted: boolean) => void;
+  todoRef: React.Ref<HTMLDivElement>;
+  doneRef: React.Ref<HTMLDivElement>;
 }
