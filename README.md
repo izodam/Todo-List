@@ -6,6 +6,11 @@
 
 <img width="1000" alt="image" src="./asset/main_nothing.PNG">
 
+
+### 📌배포 링크
+
+https://todo-list-gvztkpjo2-izodams-projects.vercel.app/
+
 ---
 
 ## 💻 프로젝트 주요 기능
@@ -29,3 +34,8 @@
 <img width="1000" alt="image" src="./asset/detail.PNG">
 
 ## ⚒️ 기술 스택
+|역할|종류|
+|:-|:-|
+|Framework|	<img src="https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white" /> |
+|Programming Language| <img src="https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white"/> |
+|Styling| <img src="https://img.shields.io/badge/styledcomponents-DB7093?style=for-the-badge&logo=styledcomponents&logoColor=white">|
