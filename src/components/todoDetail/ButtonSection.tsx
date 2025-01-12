@@ -12,7 +12,7 @@ function ButtonSection({ isEdit, deleteTodo, editTodo }: ButtonSectionProps) {
       </EditButton>
       <DeleteButton onClick={deleteTodo}>
         <Image src="/icons/delete.svg" alt="edit" width={16} height={16} />
-        <span>삭제s하기</span>
+        <span>삭제하기</span>
       </DeleteButton>
     </ButtonSectionContainer>
   );
