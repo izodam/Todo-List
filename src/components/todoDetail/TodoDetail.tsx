@@ -11,6 +11,7 @@ import {
 } from "@/api/todoDetail";
 import { useRouter } from "next/navigation";
 
+// 디테일 페이지 전체
 function TodoDetail({ initialTodo }: { initialTodo: TodoDetailType | null}) {
   const [todo, setTodo] = useState<TodoDetailType | null>(initialTodo);
   const [isEdit, setIsEdit] = useState<boolean>(false);

@@ -1,21 +1,34 @@
-import { TodoItemType } from "@/types/todo";
+import { TodoListProps } from "@/types/todo";
 import Image from "next/image";
 import styled from "styled-components";
 import TodoItem from "./TodoItem";
+import LoadingSpinner from "../common/LoadingSpinner";
 
-interface todoListProps {
-  isTodo: boolean;
-  title: string;
-  todos: TodoItemType[];
-  toggleTodoStatus: (id: number, isCompleted: boolean) => void;
-}
-
-// 각 todo와 done에 대해 section을 렌더링
-function TodoList({ isTodo, title, todos, toggleTodoStatus }: todoListProps) {
+// 각 todo와 done에 대해 투두 리스트를 렌더링
+function TodoList({
+  isTodo,
+  title,
+  todos,
+  toggleTodoStatus,
+  isLoading,
+}: TodoListProps) {
   const emptyMessage = isTodo
     ? "할 일이 없어요.\nTODO를 새롭게 추가해주세요!"
     : "아직 다 한 일이 없어요.\n해야 할 일을 체크해보세요!";
 
+  if (isLoading) {
+    return (
+      <TodoSection>
+        <Image
+          src={`/images/${title}.svg`}
+          alt="todo"
+          width={101}
+          height={36}
+        />
+        <LoadingSpinner />
+      </TodoSection>
+    );
+  }
   return (
     <TodoSection>
       <Image src={`/images/${title}.svg`} alt="todo" width={101} height={36} />

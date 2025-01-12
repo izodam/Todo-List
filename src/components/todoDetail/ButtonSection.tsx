@@ -1,14 +1,9 @@
 import { customButtonStyles } from "@/styles/customBottonStyles";
+import { ButtonSectionProps } from "@/types/todoDetail";
 import Image from "next/image";
 import styled from "styled-components";
 
-interface buttonSectionProps {
-  isEdit: boolean;
-  deleteTodo: () => void;
-  editTodo: () => void;
-}
-
-function ButtonSection({ isEdit, deleteTodo, editTodo }: buttonSectionProps) {
+function ButtonSection({ isEdit, deleteTodo, editTodo }: ButtonSectionProps) {
   return (
     <ButtonSectionContainer>
       <EditButton $isEdit={isEdit} onClick={editTodo}>
@@ -17,7 +12,7 @@ function ButtonSection({ isEdit, deleteTodo, editTodo }: buttonSectionProps) {
       </EditButton>
       <DeleteButton onClick={deleteTodo}>
         <Image src="/icons/delete.svg" alt="edit" width={16} height={16} />
-        <span>삭제하기</span>
+        <span>삭제s하기</span>
       </DeleteButton>
     </ButtonSectionContainer>
   );

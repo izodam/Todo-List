@@ -1,11 +1,9 @@
+import { MemoProps } from "@/types/todoDetail";
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
-interface memoProps {
-  initialMemo: string;
-  updateMemo: (newMemo: string) => void;
-}
-function Memo({ initialMemo, updateMemo }: memoProps) {
+
+function Memo({ initialMemo, updateMemo }: MemoProps) {
   const [memo, setMemo] = useState<string>(initialMemo);
 
   // 메모 textarea를 수직 가운데에 위치하기 위해 height를 동적으로 설정

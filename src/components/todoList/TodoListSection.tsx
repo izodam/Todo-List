@@ -1,14 +1,13 @@
-import { TodoItemType } from "@/types/todo";
+import { TodoListSectionProps } from "@/types/todo";
 import styled from "styled-components";
 import TodoList from "./TodoList";
 
-interface TodoListSectionProps {
-  todos: TodoItemType[];
-  toggleTodoStatus: (id: number, isCompleted: boolean) => void;
-}
-
 // 할일 리스트의 전체 부분
-function TodoListSection({ todos, toggleTodoStatus }: TodoListSectionProps) {
+function TodoListSection({
+  todos,
+  toggleTodoStatus,
+  isLoading,
+}: TodoListSectionProps) {
   const todolist = todos?.filter((todo) => !todo.isCompleted);
   const doneTodolist = todos?.filter((todo) => todo.isCompleted);
 
@@ -18,12 +17,14 @@ function TodoListSection({ todos, toggleTodoStatus }: TodoListSectionProps) {
         isTodo={true}
         title="todo"
         todos={todolist}
+        isLoading={isLoading}
         toggleTodoStatus={toggleTodoStatus}
       />
       <TodoList
         isTodo={false}
         title="done"
         todos={doneTodolist}
+        isLoading={isLoading}
         toggleTodoStatus={toggleTodoStatus}
       />
     </TodoListContainer>

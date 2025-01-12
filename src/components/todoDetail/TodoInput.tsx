@@ -1,13 +1,9 @@
+import { TodoInputProps } from "@/types/todoDetail";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
-interface TodoInputProps {
-  initialName: string;
-  isCompleted: boolean;
-  updateTodoName: (newName: string) => void;
-  toggleIsCompleted: () => void;
-}
+// 투두 제목 (input 창)
 function TodoInput({
   initialName,
   isCompleted,
@@ -16,7 +12,7 @@ function TodoInput({
 }: TodoInputProps) {
   const [name, setName] = useState<string>(initialName);
 
-  // input창 크기를 동적으로 설정
+  // input창 width를 동적으로 설정
   const [inputWidth, setInputWidth] = useState<number>(0);
   const hiddenElementRef = useRef<HTMLDivElement>(null);
 

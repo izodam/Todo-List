@@ -5,13 +5,10 @@ import plus_white from "../../../public/icons/plus_white.svg";
 import plus_black from "../../../public/icons/plus_black.svg";
 import { customButtonStyles } from "@/styles/customBottonStyles";
 import { addTodo } from "@/api/todo";
-import { TodoItemType } from "@/types/todo";
+import { AddTodoProps } from "@/types/todo";
 
-interface AddTodoProps {
-  hasTodo: boolean;
-  addTodoState: (newTodo: TodoItemType) => void;
-}
 
+// 투두 추가하는 input과 버튼
 function AddTodo({ hasTodo, addTodoState }: AddTodoProps) {
   const [inputValue, setInputValue] = useState<string>("");
 

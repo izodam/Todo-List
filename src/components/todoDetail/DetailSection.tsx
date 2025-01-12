@@ -1,20 +1,15 @@
 import styled from "styled-components";
 import ImageUploader from "./ImageUploader";
 import Memo from "./Memo";
+import { DetailSectionProps } from "@/types/todoDetail";
 
-interface detailSectionProps {
-  imageUrl: string;
-  memo: string;
-  updateMemo: (newMemo: string) => void;
-  handleImageChange: () => void;
-}
-
+// 메모와 이미지 렌더링
 function DetailSection({
   imageUrl,
   memo,
   updateMemo,
   handleImageChange,
-}: detailSectionProps) {
+}: DetailSectionProps) {
   return (
     <SectionContainer>
       <ImageUploader imageUrl={imageUrl} onImageChange={handleImageChange} />

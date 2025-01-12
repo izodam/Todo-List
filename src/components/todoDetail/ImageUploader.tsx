@@ -1,10 +1,6 @@
+import { ImageUploaderProps } from "@/types/todoDetail";
 import Image from "next/image";
 import styled from "styled-components";
-
-interface ImageUploaderProps {
-  imageUrl: string;
-  onImageChange: () => void;
-}
 
 function ImageUploader({ imageUrl, onImageChange }: ImageUploaderProps) {
   const hasImage = imageUrl.length !== 0;   // 이미지 여부 판단

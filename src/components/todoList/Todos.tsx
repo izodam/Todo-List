@@ -1,60 +1,71 @@
 "use client";
 import { MainContainer } from "@/styles/customMain";
 import { TodoItemType } from "@/types/todo";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import AddTodo from "./AddTodo";
 import TodoListSection from "./TodoListSection";
 import { fetchTodos, toggleComplate } from "@/api/todo";
+import LoadingSpinner from "../common/LoadingSpinner";
+import { useInView } from "react-intersection-observer";
 
 function Todos() {
   const [todos, setTodos] = useState<TodoItemType[]>([]);
 
   // pagination
   const [page, setPage] = useState<number>(1);
-  const [hasMore, setHasMore] = useState<boolean>(true);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const observerRef = useRef<HTMLDivElement>(null);
+  const [hasMore, setHasMore] = useState<boolean>(false);
+  const [isPageLoading, setIsPageLoading] = useState<boolean>(true); // 첫 로딩 상태
+  const [isScrollLoading, setIsScrollLoading] = useState<boolean>(false); // 무한 스크롤 로딩 상태
+
+  const { ref, inView } = useInView({ threshold: 1.0 });
 
   const pageSize = 10; // 한번에 불러올 항목 수
 
-  // 초기 데이터 로드
+  // 첫 데이터 로드
   useEffect(() => {
-    const loadTodos = async () => {
-      setIsLoading(true);
-      const newTodos = await fetchTodos(page, pageSize);
-      setTodos((prev) => [...prev, ...newTodos]);
-      setHasMore(newTodos.length === pageSize); // 추가 데이터가 없으면 false
-      setIsLoading(false);
+    const loadInitialTodos = async () => {
+      setPage(1);
+      setIsPageLoading(true);
+      try {
+        const initialTodos = await fetchTodos(1, pageSize);
+        setTodos(initialTodos);
+        setHasMore(initialTodos.length === pageSize); // 데이터가 더 있는지 확인
+        setPage(2);
+      } catch (error) {
+        console.error("Failed to load initial todos:", error);
+      } finally {
+        setIsPageLoading(false);
+      }
     };
 
-    loadTodos();
-  }, [page]);
+    loadInitialTodos();
+  }, []);
 
-  // 무한 스크롤 핸들러
+  // 무한 스크롤 데이터 로드
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && hasMore && !isLoading) {
-          setPage((prev) => prev + 1); // 다음 페이지 로드
+    console.log(page);
+    if (!inView || !hasMore || isScrollLoading || isPageLoading || page === 1)
+      return; // 첫 페이지는 이미 로드됨
+
+    if (inView && hasMore && !isScrollLoading) {
+      const loadMoreTodos = async () => {
+        setIsScrollLoading(true);
+        try {
+          const newTodos = await fetchTodos(page, pageSize);
+          setTodos((prev) => [...prev, ...newTodos]);
+          setHasMore(newTodos.length === pageSize);
+          await setPage((prev) => prev + 1);
+        } catch (error) {
+          console.error("Failed to load more todos:", error);
+        } finally {
+          setIsScrollLoading(false);
         }
-      },
-      { threshold: 1.0 }
-    );
+      };
 
-    if (observerRef.current) {
-      observer.observe(observerRef.current);
+      loadMoreTodos();
     }
-
-    return () => {
-      if (observerRef.current) observer.disconnect();
-    };
-  }, [hasMore, isLoading]);
-
-  if (!todos) {
-    return <div>데이터를 불러올 수 없습니다. 다시 시도해주세요.</div>; 
-  }
-  
+  }, [inView, page, hasMore, isScrollLoading]);
 
   const hasTodo = todos.length > 0;
 
@@ -64,25 +75,31 @@ function Todos() {
   };
 
   // 할일 완료 체크박스 핸들링하는 함수
-    const toggleTodoStatus = async (id: number, isCompleted: boolean) => {
-      try {
-        await toggleComplate(id, isCompleted);
-  
-        setTodos((prev) =>prev.map((todo) => (todo.id === id ? { ...todo, isCompleted } : todo)));
-      } catch (error) {
-        console.error("Failed to toggle todo status:", error);
-      }
-    };
-  
+  const toggleTodoStatus = async (id: number, isCompleted: boolean) => {
+    try {
+      await toggleComplate(id, isCompleted);
+
+      setTodos((prev) =>
+        prev.map((todo) => (todo.id === id ? { ...todo, isCompleted } : todo))
+      );
+    } catch (error) {
+      console.error("Failed to toggle todo status:", error);
+    }
+  };
+
   return (
     <Main>
-    <AddTodo hasTodo={hasTodo} addTodoState={addTodoState} />
-    <TodoListSection todos={todos} toggleTodoStatus={toggleTodoStatus} />
-    <LoadingTrigger ref={observerRef} />
-      {isLoading && <p>Loading...</p>}
-  </Main>
-    );
-  };
+      <AddTodo hasTodo={hasTodo} addTodoState={addTodoState} />
+      <TodoListSection
+        todos={todos}
+        isLoading={isPageLoading}
+        toggleTodoStatus={toggleTodoStatus}
+      />
+      {!isScrollLoading && hasMore && <LoadingTrigger ref={ref} />}
+      {!isPageLoading && isScrollLoading && <LoadingSpinner />}
+    </Main>
+  );
+}
 
 export default Todos;
 
@@ -91,5 +108,5 @@ const Main = styled.main`
 `;
 
 const LoadingTrigger = styled.div`
-  height: 1px;
+  height: 30px;
 `;
